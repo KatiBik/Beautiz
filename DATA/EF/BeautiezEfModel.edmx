@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bgroup21_prodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bussiness">
+          <Key>
+            <PropertyRef Name="Bussiness_Id" />
+          </Key>
+          <Property Name="Bussiness_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bussiness_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="summery" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Credit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="media" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="b_address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+          <Property Name="photos" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="userEmail" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="treatmentId" />
+          </Key>
+          <Property Name="treatmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Treatment_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Treatment_duration" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="Bussiness_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="typeOfTreat">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="full_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="credit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gps" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bussiness_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Bussiness" Type="Self.Bussiness" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="Bussiness">
+              <PropertyRef Name="userEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Bussiness">
+          <End Role="Bussiness" Type="Self.Bussiness" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bussiness">
+              <PropertyRef Name="Bussiness_Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="treatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bgroup21_prodModelStoreContainer">
+          <EntitySet Name="Bussiness" EntityType="Self.Bussiness" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="typeOfTreat" EntityType="Self.typeOfTreat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bussiness_Users" Association="Self.FK_Bussiness_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bussiness" EntitySet="Bussiness" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Bussiness" Association="Self.FK_Treatment_Bussiness">
+            <End Role="Bussiness" EntitySet="Bussiness" />
+            <End Role="Treatment" EntitySet="Treatment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bgroup21_prodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bussiness">
+          <Key>
+            <PropertyRef Name="Bussiness_Id" />
+          </Key>
+          <Property Name="Bussiness_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bussiness_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="summery" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Credit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="media" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="b_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <Property Name="photos" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Bussiness_Users" FromRole="Bussiness" ToRole="Users" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK_Treatment_Bussiness" FromRole="Bussiness" ToRole="Treatment" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="treatmentId" />
+          </Key>
+          <Property Name="treatmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Treatment_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Summary" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Treatment_duration" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="Bussiness_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bussiness" Relationship="Self.FK_Treatment_Bussiness" FromRole="Treatment" ToRole="Bussiness" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="full_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="credit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gps" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="U_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bussinesses" Relationship="Self.FK_Bussiness_Users" FromRole="Users" ToRole="Bussiness" />
+        </EntityType>
+        <Association Name="FK_Bussiness_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Bussiness" Type="Self.Bussiness" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="Bussiness">
+              <PropertyRef Name="userEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Bussiness">
+          <End Role="Bussiness" Type="Self.Bussiness" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bussiness">
+              <PropertyRef Name="Bussiness_Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="treatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BeautiezDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bussinesses" EntityType="Self.Bussiness" />
+          <EntitySet Name="Treatments" EntityType="Self.Treatment" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Bussiness_Users" Association="Self.FK_Bussiness_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bussiness" EntitySet="Bussinesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Bussiness" Association="Self.FK_Treatment_Bussiness">
+            <End Role="Bussiness" EntitySet="Bussinesses" />
+            <End Role="Treatment" EntitySet="Treatments" />
+          </AssociationSet>
+          <EntitySet Name="typeOfTreats" EntityType="bgroup21_prodModel.typeOfTreat" />
+        </EntityContainer>
+        <EntityType Name="typeOfTreat">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bgroup21_prodModelStoreContainer" CdmEntityContainer="BeautiezDbContext">
+          <EntitySetMapping Name="Bussinesses">
+            <EntityTypeMapping TypeName="bgroup21_prodModel.Bussiness">
+              <MappingFragment StoreEntitySet="Bussiness">
+                <ScalarProperty Name="Bussiness_Id" ColumnName="Bussiness_Id" />
+                <ScalarProperty Name="Bussiness_name" ColumnName="Bussiness_name" />
+                <ScalarProperty Name="summery" ColumnName="summery" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="media" ColumnName="media" />
+                <ScalarProperty Name="b_address" ColumnName="b_address" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="photos" ColumnName="photos" />
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treatments">
+            <EntityTypeMapping TypeName="bgroup21_prodModel.Treatment">
+              <MappingFragment StoreEntitySet="Treatment">
+                <ScalarProperty Name="treatmentId" ColumnName="treatmentId" />
+                <ScalarProperty Name="Treatment_name" ColumnName="Treatment_name" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Treatment_duration" ColumnName="Treatment_duration" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="Bussiness_Id" ColumnName="Bussiness_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="bgroup21_prodModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="gps" ColumnName="gps" />
+                <ScalarProperty Name="U_Address" ColumnName="U_Address" />
+                <ScalarProperty Name="points" ColumnName="points" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeOfTreats">
+            <EntityTypeMapping TypeName="bgroup21_prodModel.typeOfTreat">
+              <MappingFragment StoreEntitySet="typeOfTreat">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
